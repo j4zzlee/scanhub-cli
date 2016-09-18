@@ -1,6 +1,6 @@
 {
   "name": "scanhub-cli",
-  "version": "2.0.1-20160919-2",
+  "version": "2.0.1-20160919-3",
   "description": "scanhub-cli",
   "repository": {
     "type": "git",
@@ -46,6 +46,7 @@
     "progress-stream": "^1.2.0",
     "prompt": "^1.0.0",
     "request": "^2.75.0",
+    "source-map-support": "^0.4.2",
     "urlencode": "^1.1.0",
     "validator": "^5.7.0",
     "webpack": "^1.13.2"
