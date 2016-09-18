@@ -1,7 +1,6 @@
 var chalk       = require('chalk');
 var fs          = require('fs');
 var path        = require('path');
-var md5         = require('md5');
 var request     = require('request');
 var jsonFile    = require('jsonfile');
 var progress    = require('progress-stream');
@@ -40,7 +39,7 @@ class ScanUploadCommand {
 
     async action() {
         try {
-            var configFile = './.config.json';
+            var configFile = path.join(__dirname, '.config.json');
 
             if (!fs.existsSync(configFile)) {
                 console.error('You are not configure API Endpoint yet. Please use api:configure command to configure it.');

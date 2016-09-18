@@ -1,16 +1,11 @@
 var chalk       = require('chalk');
 var fs          = require('fs');
 var path        = require('path');
-var md5         = require('md5');
 var request     = require('request');
 var jsonFile    = require('jsonfile');
-var prompt      = require('prompt');
 var Promise     = require('bluebird');
-var validator   = require('validator');
 var urlencode   = require('urlencode');
 var ProgressBar = require('node-status');
-var extend      = require('extend');
-var _           = require('lodash');
 Promise.promisifyAll(request);
 
 class SearchHostCommand {
@@ -91,7 +86,7 @@ class SearchHostCommand {
         this.program    = program;
         var repository  = this.program.repository || '',
             output      = this.program.output || '',
-            configFile  = './.config.json';
+            configFile  = path.join(__dirname, '.config.json');
         repository      = repository.trim();
         output          = output.trim();
         this.repository = repository || '';

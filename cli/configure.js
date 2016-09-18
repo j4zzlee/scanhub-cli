@@ -1,7 +1,5 @@
 var chalk    = require('chalk');
-var fs       = require('fs');
 var path     = require('path');
-var md5      = require('md5');
 var request  = require('request');
 var jsonFile = require('jsonfile');
 var prompt   = require('prompt');
@@ -53,7 +51,7 @@ class ApiConfigurationCommand {
                 process.exit(1);
             }
 
-            var configFile = './.config.json';
+            var configFile = path.join(__dirname, '.config.json');
 
             //ask for password
             var self       = this,
