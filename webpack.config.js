@@ -2,11 +2,6 @@ var webpack = require('webpack');
 var path    = require('path');
 var fs      = require('fs');
 var util    = require('util');
-var nconf   = require('nconf');
-nconf.use('memory');
-nconf.argv();
-nconf.env();
-//var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /**
  * Load nodejs environments from .env file
@@ -78,18 +73,13 @@ module.exports = function (options) {
             new webpack.optimize.UglifyJsPlugin({
                 sourceMap: false
             }),
-            // new webpack.DefinePlugin({
-            //     "process.env": {
-            //         NODE_ENV: 'development' || 'production'
-            //     }
-            // }),
             new webpack.NoErrorsPlugin()
         );
     }
 
     return {
         entry    : {
-            main      : ['./cli/index.js']
+            main: ['./cli/index.js']
         },
         target   : 'node',
         output   : output,

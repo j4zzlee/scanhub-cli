@@ -34,8 +34,12 @@ class CommandTool {
                     });
 
                     cmd.action(async () => {
-                        var command = new Command(cmd);
-                        await command.action();
+                        try {
+                            var command = new Command(cmd);
+                            await command.action();
+                        } catch (ex) {
+                            console.error(ex)
+                        }
                     });
                 });
         });
