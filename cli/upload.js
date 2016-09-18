@@ -4,7 +4,6 @@ var path        = require('path');
 var request     = require('request');
 var jsonFile    = require('jsonfile');
 var progress    = require('progress-stream');
-var ProgressBar = require('node-status');
 
 class ScanUploadCommand {
     progressBar;
@@ -25,16 +24,17 @@ class ScanUploadCommand {
 
     constructor(program) {
         this.program = program;
+        this.PROGRESS_BAR = require('node-status');
     }
 
 
     registerProgressBar(totalCount) {
-        this.progressBar = ProgressBar.addItem("Uploaded", {
+        this.progressBar = this.PROGRESS_BAR.addItem("Uploaded", {
             type: ['bar', 'percentage'],
             max : totalCount
         });
 
-        ProgressBar.start();
+        this.PROGRESS_BAR.start();
     }
 
     async action() {
@@ -89,7 +89,7 @@ class ScanUploadCommand {
                 prevProgress = progress.percentage;
 
                 if (prevProgress >= 100) {
-                    ProgressBar.stop();
+                    this.PROGRESS_BAR.stop();
                 }
             });
 

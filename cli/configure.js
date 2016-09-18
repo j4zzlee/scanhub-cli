@@ -48,20 +48,21 @@ class ApiConfigurationCommand {
             process.exit(1);
         }
 
-        var configFile   = path.join(__dirname, '.config.json');
+        var configFile = path.join(__dirname, '.config.json');
+
         var self         = this,
             properties   = [
                 {
                     name       : 'password',
-                    description: chalk.green('Enter your password to connect to API: '),
+                    description: chalk.red('Enter your password to connect to API:'),
                     hidden     : true,
                     required   : true,
                     replace    : '*'
                 }
             ];
+
         prompt.message   = '';
         prompt.delimiter = '';
-
         prompt.start();
 
         prompt.get(properties, function (err, result) {

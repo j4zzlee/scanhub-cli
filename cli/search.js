@@ -5,7 +5,6 @@ var request     = require('request');
 var jsonFile    = require('jsonfile');
 var Promise     = require('bluebird');
 var urlencode   = require('urlencode');
-var ProgressBar = require('node-status');
 Promise.promisifyAll(request);
 
 class SearchHostCommand {
@@ -97,6 +96,7 @@ class SearchHostCommand {
         }
 
         this.output = this.getTargetOutput(output);
+        this.PROGRESS_BAR = require('node-status'); //This one conflicts with prompt
     }
 
     async search(fields, filters, facets, pageSize, pageIndex) {
@@ -282,12 +282,12 @@ class SearchHostCommand {
 
     save(hosts, downloadedCount, totalDownloadedCount, totalCount) {
         if (!hosts || !hosts.length) {
-            ProgressBar.stop();
+            this.PROGRESS_BAR.stop();
             return;
         }
         if (this.output) {
             if (!hosts || !hosts.length) {
-                ProgressBar.stop();
+                this.PROGRESS_BAR.stop();
                 return;
             }
 
@@ -306,7 +306,7 @@ class SearchHostCommand {
             }
 
             if (totalDownloadedCount >= totalCount) {
-                ProgressBar.stop();
+                this.PROGRESS_BAR.stop();
                 this.endSave();
             }
 
@@ -323,18 +323,18 @@ class SearchHostCommand {
         }
 
         if (totalDownloadedCount >= totalCount) {
-            ProgressBar.stop();
+            this.PROGRESS_BAR.stop();
         }
     };
 
     registerProgressBar(totalCount) {
         if (this.output) {
-            this.progressBar = ProgressBar.addItem("Downloaded", {
+            this.progressBar = this.PROGRESS_BAR.addItem("Downloaded", {
                 type: ['count', 'bar', 'percentage'],
                 max : totalCount
             });
 
-            ProgressBar.start();
+            this.PROGRESS_BAR.start();
         }
     }
 
